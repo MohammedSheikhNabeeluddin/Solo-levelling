@@ -42,7 +42,6 @@ object BlockingEngine {
         windows.forEach { window ->
             val startMinute = window.start.hour * 60 + window.start.minute
             val endMinute = window.end.hour * 60 + window.end.minute
-            if (startMinute == endMinute) return true
             if (startMinute < endMinute) {
                 for (minute in startMinute until endMinute) {
                     if (minutes[minute]) return true

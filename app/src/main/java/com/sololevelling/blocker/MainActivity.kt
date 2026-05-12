@@ -23,7 +23,7 @@ import java.util.UUID
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var repository: ConfigRepository
-    private val timeFormatter = DateTimeFormatter.ofPattern("H:mm")
+    private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
     private var selectedPackages: Set<String> = emptySet()
     private var hasInitialized = false
 
@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
 
         val current = repository.getConfig()
         val updated = current.copy(
-            tasks = current.tasks.filter { it.date != today && it.date != tomorrow } + tasks + copied,
+            tasks = current.tasks.filterNot { it.date == today || it.date == tomorrow } + tasks + copied,
         )
         val saved = repository.saveConfig(updated)
         if (!saved) {
@@ -211,6 +211,10 @@ class MainActivity : AppCompatActivity() {
             val end = runCatching { LocalTime.parse(endText, timeFormatter) }.getOrNull()
             if (start == null || end == null) {
                 showStatus("Use 24-hour time format like 09:30 for schedule rows.")
+                return null
+            }
+            if (start == end) {
+                showStatus("Start and end times must be different for schedule rows.")
                 return null
             }
             val type = if (rowBinding.windowTypeSpinner.selectedItemPosition == 1) WindowType.BREAK else WindowType.FOCUS
