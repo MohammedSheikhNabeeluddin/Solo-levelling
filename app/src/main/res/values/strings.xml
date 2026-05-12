@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Solo Levelling</string>
+    <string name="accessibility_description">Blocks configured apps and websites during focus time.</string>
+    <string name="save_config">Save configuration</string>
+    <string name="lock_today">Lock selected apps for 24h</string>
+    <string name="open_accessibility">Open accessibility settings</string>
+    <string name="open_usage_access">Open usage access settings</string>
+</resources>

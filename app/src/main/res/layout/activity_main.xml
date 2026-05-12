@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blocked app package names (comma separated)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/blockedAppsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="com.instagram.android, com.facebook.katana"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Blocked website keywords/domains (comma separated)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/blockedSitesInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="porn, xvideos, xnxx"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Schedule from spreadsheet rows: HH:mm,HH:mm,type (focus or break)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/scheduleInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="09:00,11:00,focus&#10;11:00,11:30,break&#10;11:30,14:00,focus"
+            android:inputType="textMultiLine"
+            android:minLines="5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Reminder interval in minutes (minimum 15)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/reminderInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="30"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/save_config" />
+
+        <Button
+            android:id="@+id/lockTodayButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/lock_today" />
+
+        <Button
+            android:id="@+id/openAccessibilityButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/open_accessibility" />
+
+        <Button
+            android:id="@+id/openUsageAccessButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/open_usage_access" />
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Status: not configured"
+            android:textColor="@android:color/holo_blue_dark" />
+
+    </LinearLayout>
+</ScrollView>
