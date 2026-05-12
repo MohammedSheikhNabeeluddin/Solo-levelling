@@ -31,12 +31,11 @@ class MainActivity : AppCompatActivity() {
     private val appSelectionLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                val packages = result.data
+                selectedPackages = result.data
                     ?.getStringArrayListExtra(AppSelectionActivity.EXTRA_SELECTED_PACKAGES)
                     ?.toSet()
                     .orEmpty()
-                selectedPackages = packages
-                updateSelectedAppsSummary(packages)
+                updateSelectedAppsSummary(selectedPackages)
             }
         }
 
