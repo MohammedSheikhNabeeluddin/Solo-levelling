@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
 
         val current = repository.getConfig()
         val updated = current.copy(
-            tasks = current.tasks.filterNot { it.date == today || it.date == tomorrow } + tasks + copied,
+            tasks = current.tasks.filterNot { it.date == tomorrow } + copied,
         )
         val saved = repository.saveConfig(updated)
         if (!saved) {
@@ -270,6 +270,7 @@ class MainActivity : AppCompatActivity() {
         raw.orEmpty().split(',').map { it.trim() }.filter { it.isNotBlank() }.toSet()
 
     private fun requestNotificationPermission() {
+        // POST_NOTIFICATIONS is required on Android 13 (API 33) and above.
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
             android.content.pm.PackageManager.PERMISSION_GRANTED

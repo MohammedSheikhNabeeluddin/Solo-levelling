@@ -27,7 +27,7 @@ object ReminderScheduler {
         val workManager = WorkManager.getInstance(context)
         workManager.cancelAllWorkByTag(TaskReminderWorker.WORK_TAG)
 
-        val now = LocalDateTime.now()
+        val now = LocalDateTime.now().withSecond(0).withNano(0)
         tasks.forEach { task ->
             val scheduled = LocalDateTime.of(task.date, task.time)
             if (scheduled.isBefore(now)) return@forEach

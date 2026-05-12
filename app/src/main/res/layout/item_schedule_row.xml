@@ -10,9 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:digits="0123456789:"
         android:hint="09:00"
-        android:inputType="text" />
+        android:inputType="time" />
 
     <EditText
         android:id="@+id/endTimeInput"
@@ -20,9 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_weight="1"
-        android:digits="0123456789:"
         android:hint="11:00"
-        android:inputType="text" />
+        android:inputType="time" />
 
     <Spinner
         android:id="@+id/windowTypeSpinner"
