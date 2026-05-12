@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/taskTimeInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="14:00 (24h)"
+        android:inputType="time" />
+
+    <EditText
+        android:id="@+id/taskTitleInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="2"
+        android:hint="@string/task_hint"
+        android:inputType="text" />
+
+    <ImageButton
+        android:id="@+id/removeTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/remove_row"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+</LinearLayout>

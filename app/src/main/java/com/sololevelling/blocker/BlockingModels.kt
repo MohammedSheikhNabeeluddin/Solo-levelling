@@ -1,5 +1,6 @@
 package com.sololevelling.blocker
 
+import java.time.LocalDate
 import java.time.LocalTime
 
 data class TimeWindow(
@@ -13,6 +14,13 @@ enum class WindowType {
     BREAK,
 }
 
+data class TaskEntry(
+    val id: String,
+    val title: String,
+    val time: LocalTime,
+    val date: LocalDate,
+)
+
 data class BlockConfig(
     val blockedPackages: Set<String> = emptySet(),
     val alwaysAllowedPackages: Set<String> = setOf("com.google.android.youtube"),
@@ -20,7 +28,8 @@ data class BlockConfig(
     val schedule: List<TimeWindow> = emptyList(),
     val hardLockedPackages: Set<String> = emptySet(),
     val hardLockUntilEpochMillis: Long = 0L,
-    val reminderMinutes: Int = 30,
+    val checkInMinutes: Int = 30,
+    val tasks: List<TaskEntry> = emptyList(),
 )
 
 data class BlockDecision(

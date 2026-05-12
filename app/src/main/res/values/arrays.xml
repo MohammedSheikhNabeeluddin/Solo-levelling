@@ -1,0 +1,6 @@
+<resources>
+    <string-array name="window_types">
+        <item>Focus</item>
+        <item>Break</item>
+    </string-array>
+</resources>

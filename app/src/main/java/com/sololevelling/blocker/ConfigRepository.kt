@@ -3,6 +3,9 @@ package com.sololevelling.blocker
 import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
+import java.time.LocalDate
+import java.time.LocalTime
+import java.util.UUID
 
 class ConfigRepository(context: Context) {
     private val prefs = context.getSharedPreferences("solo_levelling", Context.MODE_PRIVATE)
@@ -30,7 +33,20 @@ class ConfigRepository(context: Context) {
                 },
                 hardLockedPackages = root.getJSONArrayOrEmpty("hardLockedPackages").toStringSet(),
                 hardLockUntilEpochMillis = root.optLong("hardLockUntilEpochMillis", 0L),
-                reminderMinutes = root.optInt("reminderMinutes", 30).coerceAtLeast(15),
+                checkInMinutes = root.optInt("checkInMinutes", root.optInt("reminderMinutes", 30)).coerceAtLeast(15),
+                tasks = root.getJSONArrayOrEmpty("tasks").let { arr ->
+                    buildList {
+                        for (i in 0 until arr.length()) {
+                            val item = arr.optJSONObject(i) ?: continue
+                            val title = item.optString("title").trim()
+                            if (title.isBlank()) continue
+                            val time = runCatching { LocalTime.parse(item.getString("time")) }.getOrNull() ?: continue
+                            val date = runCatching { LocalDate.parse(item.getString("date")) }.getOrNull() ?: continue
+                            val id = item.optString("id").ifBlank { UUID.randomUUID().toString() }
+                            add(TaskEntry(id = id, title = title, time = time, date = date))
+                        }
+                    }
+                },
             )
         }.getOrDefault(BlockConfig())
     }
@@ -55,7 +71,21 @@ class ConfigRepository(context: Context) {
             })
             put("hardLockedPackages", JSONArray(config.hardLockedPackages.toList()))
             put("hardLockUntilEpochMillis", config.hardLockUntilEpochMillis)
-            put("reminderMinutes", config.reminderMinutes)
+            put("checkInMinutes", config.checkInMinutes)
+            // Keep legacy reminderMinutes for older app versions.
+            put("reminderMinutes", config.checkInMinutes)
+            put("tasks", JSONArray().apply {
+                config.tasks.forEach { task ->
+                    put(
+                        JSONObject().apply {
+                            put("id", task.id)
+                            put("title", task.title)
+                            put("time", task.time.toString())
+                            put("date", task.date.toString())
+                        }
+                    )
+                }
+            })
         }
 
         return prefs.edit().putString("config", root.toString()).commit()
@@ -88,7 +118,21 @@ class ConfigRepository(context: Context) {
             })
             put("hardLockedPackages", JSONArray(config.hardLockedPackages.toList()))
             put("hardLockUntilEpochMillis", config.hardLockUntilEpochMillis)
-            put("reminderMinutes", config.reminderMinutes)
+            put("checkInMinutes", config.checkInMinutes)
+            // Keep legacy reminderMinutes for older app versions.
+            put("reminderMinutes", config.checkInMinutes)
+            put("tasks", JSONArray().apply {
+                config.tasks.forEach { task ->
+                    put(
+                        JSONObject().apply {
+                            put("id", task.id)
+                            put("title", task.title)
+                            put("time", task.time.toString())
+                            put("date", task.date.toString())
+                        }
+                    )
+                }
+            })
         }
         return root.toString()
     }

@@ -5,4 +5,24 @@
     <string name="lock_today">Lock selected apps for 24h</string>
     <string name="open_accessibility">Open accessibility settings</string>
     <string name="open_usage_access">Open usage access settings</string>
+    <string name="daily_focus_header">Daily focus setup</string>
+    <string name="daily_focus_subtitle">Plan your focus windows, tasks, and reminders for today.</string>
+    <string name="schedule_title">Focus &amp; break schedule</string>
+    <string name="schedule_subtitle">Add time windows. Focus blocks apps, break windows unlock them.</string>
+    <string name="add_schedule_row">Add time window</string>
+    <string name="break_window_hint">Apps are only available during break windows.</string>
+    <string name="tasks_title">Today's tasks</string>
+    <string name="add_task">Add task</string>
+    <string name="copy_tasks_tomorrow">Copy tasks to tomorrow</string>
+    <string name="task_hint">What do you want to do?</string>
+    <string name="check_in_title">Check-in reminder cadence (minutes)</string>
+    <string name="check_in_hint">30</string>
+    <string name="blocked_sites_title">Blocked website keywords</string>
+    <string name="blocked_sites_hint">porn, xvideos, xnxx</string>
+    <string name="blocked_apps_title">Blocked apps</string>
+    <string name="select_blocked_apps">Select apps to block</string>
+    <string name="no_apps_selected">No apps selected yet.</string>
+    <string name="remove_row">Remove row</string>
+    <string name="select_apps_header">Select apps to block</string>
+    <string name="save_selection">Save selection</string>
 </resources>
