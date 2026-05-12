@@ -72,6 +72,7 @@ class ConfigRepository(context: Context) {
             put("hardLockedPackages", JSONArray(config.hardLockedPackages.toList()))
             put("hardLockUntilEpochMillis", config.hardLockUntilEpochMillis)
             put("checkInMinutes", config.checkInMinutes)
+            // Keep legacy reminderMinutes for older app versions.
             put("reminderMinutes", config.checkInMinutes)
             put("tasks", JSONArray().apply {
                 config.tasks.forEach { task ->
@@ -118,6 +119,7 @@ class ConfigRepository(context: Context) {
             put("hardLockedPackages", JSONArray(config.hardLockedPackages.toList()))
             put("hardLockUntilEpochMillis", config.hardLockUntilEpochMillis)
             put("checkInMinutes", config.checkInMinutes)
+            // Keep legacy reminderMinutes for older app versions.
             put("reminderMinutes", config.checkInMinutes)
             put("tasks", JSONArray().apply {
                 config.tasks.forEach { task ->
