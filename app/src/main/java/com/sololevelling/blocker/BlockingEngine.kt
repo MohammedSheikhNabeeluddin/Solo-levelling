@@ -25,8 +25,41 @@ object BlockingEngine {
     }
 
     fun isFocusActive(now: LocalTime, windows: List<TimeWindow>): Boolean {
-        val activeWindow = windows.firstOrNull { now inRange (it.start..it.end) }
-        return activeWindow?.type == WindowType.FOCUS
+        if (windows.isEmpty()) return false
+        if (isBreakActive(now, windows)) return false
+        val focusActive = windows.any { it.type == WindowType.FOCUS && now inRange (it.start..it.end) }
+        if (focusActive) return true
+        return windows.any { it.type == WindowType.BREAK }
+    }
+
+    fun isBreakActive(now: LocalTime, windows: List<TimeWindow>): Boolean {
+        return windows.any { it.type == WindowType.BREAK && now inRange (it.start..it.end) }
+    }
+
+    fun hasOverlappingWindows(windows: List<TimeWindow>): Boolean {
+        if (windows.isEmpty()) return false
+        val minutes = BooleanArray(24 * 60)
+        windows.forEach { window ->
+            val startMinute = window.start.hour * 60 + window.start.minute
+            val endMinute = window.end.hour * 60 + window.end.minute
+            if (startMinute == endMinute) return true
+            if (startMinute < endMinute) {
+                for (minute in startMinute until endMinute) {
+                    if (minutes[minute]) return true
+                    minutes[minute] = true
+                }
+            } else {
+                for (minute in startMinute until minutes.size) {
+                    if (minutes[minute]) return true
+                    minutes[minute] = true
+                }
+                for (minute in 0 until endMinute) {
+                    if (minutes[minute]) return true
+                    minutes[minute] = true
+                }
+            }
+        }
+        return false
     }
 
     fun shouldBlockApp(config: BlockConfig, packageName: String, now: LocalDateTime = LocalDateTime.now()): BlockDecision {

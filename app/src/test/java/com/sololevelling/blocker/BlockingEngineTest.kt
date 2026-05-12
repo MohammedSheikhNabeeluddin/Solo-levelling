@@ -44,6 +44,28 @@ class BlockingEngineTest {
     }
 
     @Test
+    fun `blocks apps outside break windows when breaks defined`() {
+        val config = BlockConfig(
+            blockedPackages = setOf("com.instagram.android"),
+            schedule = listOf(TimeWindow(LocalTime.of(10, 0), LocalTime.of(11, 0), WindowType.BREAK)),
+        )
+
+        val decision = BlockingEngine.shouldBlockApp(config, "com.instagram.android", LocalDateTime.of(2025, 1, 1, 9, 30))
+        assertTrue(decision.blocked)
+    }
+
+    @Test
+    fun `does not block apps during break windows`() {
+        val config = BlockConfig(
+            blockedPackages = setOf("com.instagram.android"),
+            schedule = listOf(TimeWindow(LocalTime.of(10, 0), LocalTime.of(11, 0), WindowType.BREAK)),
+        )
+
+        val decision = BlockingEngine.shouldBlockApp(config, "com.instagram.android", LocalDateTime.of(2025, 1, 1, 10, 30))
+        assertFalse(decision.blocked)
+    }
+
+    @Test
     fun `blocks website keywords always`() {
         val config = BlockConfig(blockedDomains = setOf("porn", "xnxx"))
         val decision = BlockingEngine.shouldBlockWebsite(config, "Visit xnxx.com now")
