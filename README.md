@@ -30,8 +30,8 @@ This repository now contains a full Android app source project that helps you:
 6. APK output path:
    - `app/build/outputs/apk/debug/app-debug.apk`
 7. Install on phone:
-    - from Android Studio Run button, or
-    - `adb install -r app/build/outputs/apk/debug/app-debug.apk`
+   - from Android Studio Run button, or
+   - `adb install -r app/build/outputs/apk/debug/app-debug.apk`
 
 ### Alternate install path (without Android Studio)
 

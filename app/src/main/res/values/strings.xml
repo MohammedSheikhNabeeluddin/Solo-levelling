@@ -11,7 +11,7 @@
     <string name="schedule_subtitle">Add time windows. Focus blocks apps, break windows unlock them.</string>
     <string name="add_schedule_row">Add time window</string>
     <string name="break_window_hint">Apps are only available during break windows.</string>
-    <string name="tasks_title">Today&apos;s tasks</string>
+    <string name="tasks_title">Today's tasks</string>
     <string name="add_task">Add task</string>
     <string name="copy_tasks_tomorrow">Copy tasks to tomorrow</string>
     <string name="task_hint">What do you want to do?</string>

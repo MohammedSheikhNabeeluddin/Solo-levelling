@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var repository: ConfigRepository
     private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
     private var selectedPackages: Set<String> = emptySet()
-    private var hasInitialized = false
+    private var isInitialBindingComplete = false
 
     private val appSelectionLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -71,12 +71,12 @@ class MainActivity : AppCompatActivity() {
 
         requestNotificationPermission()
         bindInitialState()
-        hasInitialized = true
+        isInitialBindingComplete = true
     }
 
     override fun onResume() {
         super.onResume()
-        if (hasInitialized) {
+        if (isInitialBindingComplete) {
             updateStatus(repository.getConfig())
         }
     }
@@ -271,7 +271,7 @@ class MainActivity : AppCompatActivity() {
         raw.orEmpty().split(',').map { it.trim() }.filter { it.isNotBlank() }.toSet()
 
     private fun requestNotificationPermission() {
-        // POST_NOTIFICATIONS is required on Android 13 (API 33) and above.
+        // POST_NOTIFICATIONS was introduced in Android 13 (API 33).
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
             return
